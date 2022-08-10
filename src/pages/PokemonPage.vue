@@ -4,6 +4,14 @@
     <h1>¿Quien es este Pokemon?</h1>
     <PokemonPicture :pokemon-id="pokemon.id" :show-pokemon="showPokemon"/>
     <PokemonOptions :pokemons="pokemonArr" @selection-pokemon="checkAnswer"/>
+
+    <template v-if="showAnswer">
+      <h2 class="fade-in">{{message}}</h2>
+      <button class="fade-in" @click="newGame">
+        Nuevo Juego
+      </button>
+    </template>
+
   </div>
 
 </template>
@@ -24,7 +32,9 @@ export default {
     return {
       pokemonArr: [],
       pokemon: null,
-      showPokemon: false
+      showPokemon: false,
+      showAnswer: false,
+      message: ''
     }
   },
   methods:{
@@ -34,8 +44,18 @@ export default {
       const rndInt = Math.floor(Math.random() * this.pokemonArr.length);
       this.pokemon = this.pokemonArr[rndInt];
     },
-    checkAnswer(answer){
-        this.showPokemon = true;
+    checkAnswer(selectedId){
+       this.showPokemon = true;
+       this.showAnswer = true;
+      (selectedId === this.pokemon.id) ? this.message = `¡Correcto! ${this.pokemon.name}` : this.message = '¡Incorrecto!';
+    },
+    newGame(){
+      this.showAnswer = false;
+      this.showPokemon = false;
+      this.pokemonArr = [];
+      this.pokemon = null;
+      this.message = '';
+      this.mixPokemonArray();
     }
   },
   mounted() {
