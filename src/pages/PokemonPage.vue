@@ -2,8 +2,8 @@
   <h1 v-if="!pokemon">Espere por favor...</h1>
   <div v-else>
     <h1>¿Quien es este Pokemon?</h1>
-    <PokemonPicture :pokemonId="pokemon.id" :showPokemon="showPokemon"/>
-    <PokemonOptions :pokemons="pokemonArr"/>
+    <PokemonPicture :pokemon-id="pokemon.id" :show-pokemon="showPokemon"/>
+    <PokemonOptions :pokemons="pokemonArr" @selection-pokemon="checkAnswer"/>
   </div>
 
 </template>
@@ -33,6 +33,9 @@ export default {
 
       const rndInt = Math.floor(Math.random() * this.pokemonArr.length);
       this.pokemon = this.pokemonArr[rndInt];
+    },
+    checkAnswer(answer){
+        this.showPokemon = true;
     }
   },
   mounted() {
