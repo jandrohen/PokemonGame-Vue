@@ -1,5 +1,6 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount} from '@vue/test-utils'
 import PokemonPage from '@/pages/PokemonPage'
+import {pokemons} from '../mocks/pokemons.mock';
 
 describe('PokemonPage Component', () => {
 
@@ -21,4 +22,20 @@ describe('PokemonPage Component', () => {
     expect(mixPokemonArraySpy).toHaveBeenCalled()
   });
 
+  test('debe de hace match con el snapshot cuando cargan los pokemons ', () => {
+
+    const wrapper = shallowMount(PokemonPage, {
+      data() {
+        return {
+          pokemonArray: pokemons,
+          pokemon: pokemons[0],
+          showPokemon: false,
+          showAnswer: false,
+          message: '',
+        }
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  });
 });
