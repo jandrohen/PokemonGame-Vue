@@ -46,7 +46,7 @@ export default {
     checkAnswer(selectedId){
        this.showPokemon = true;
        this.showAnswer = true;
-      (selectedId === this.pokemon.id) ? this.message = `¡Correcto! ${this.pokemon.name}` : this.message = '¡Incorrecto!';
+      (selectedId === this.pokemon.id) ? this.message = `¡Correcto! ${this.pokemon.name}` : this.message = `¡Incorrecto!, el pokemon era ${this.pokemon.name}`;
     },
     newGame(){
       this.showAnswer = false;
